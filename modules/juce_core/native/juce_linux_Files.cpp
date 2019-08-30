@@ -215,9 +215,13 @@ bool Process::openDocument (const String& fileName, const String& parameters)
     {
         setsid();
 
-        // Child process
-        execve (argv[0], (char**) argv, environ);
-        exit (0);
+        #if JUCE_BSD
+            // TODO:
+        #else
+            // Child process
+            execve (argv[0], (char**) argv, environ);
+            exit (0);
+        #endif
     }
 
     return cpid >= 0;

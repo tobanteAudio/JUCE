@@ -88,12 +88,15 @@ int SystemStats::getCpuSpeedInMegahertz()
 
 int SystemStats::getMemorySizeInMegabytes()
 {
-    struct sysinfo sysi;
+    #if JUCE_BSD
+        return 0; // TODO:
+    #else
+        struct sysinfo sysi;
+        if (sysinfo (&sysi) == 0)
+            return (int) (sysi.totalram * sysi.mem_unit / (1024 * 1024));
 
-    if (sysinfo (&sysi) == 0)
-        return (int) (sysi.totalram * sysi.mem_unit / (1024 * 1024));
-
-    return 0;
+        return 0;
+    #endif // JUCE_BSD
 }
 
 int SystemStats::getPageSize()
@@ -136,8 +139,24 @@ static String getLocaleValue (nl_item key)
     return result;
 }
 
-String SystemStats::getUserLanguage()     { return getLocaleValue (_NL_IDENTIFICATION_LANGUAGE); }
-String SystemStats::getUserRegion()       { return getLocaleValue (_NL_IDENTIFICATION_TERRITORY); }
+String SystemStats::getUserLanguage()
+{
+    #if JUCE_BSD
+        return ""; // TODO:
+    #else
+        return getLocaleValue (_NL_IDENTIFICATION_LANGUAGE);
+    #endif
+}
+
+String SystemStats::getUserRegion()
+{
+    #if JUCE_BSD
+        return ""; // TODO:
+    #else
+        return getLocaleValue (_NL_IDENTIFICATION_TERRITORY);
+    #endif
+}
+
 String SystemStats::getDisplayLanguage()  { return getUserLanguage() + "-" + getUserRegion(); }
 
 //==============================================================================

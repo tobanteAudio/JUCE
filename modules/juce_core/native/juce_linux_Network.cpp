@@ -25,6 +25,10 @@ namespace juce
 
 void MACAddress::findAllAddresses (Array<MACAddress>& result)
 {
+   #if JUCE_BSD
+    return;
+   #else // JUCE_LINUX
+
     auto s = socket (AF_INET, SOCK_DGRAM, 0);
 
     if (s != -1)
@@ -53,6 +57,7 @@ void MACAddress::findAllAddresses (Array<MACAddress>& result)
 
         ::close (s);
     }
+  #endif // JUCE_BSD
 }
 
 

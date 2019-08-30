@@ -250,6 +250,8 @@
  #include <errno.h>
  #include <fcntl.h>
  #include <fnmatch.h>
+ #include <ifaddrs.h>
+ #include <langinfo.h>
  #include <net/if.h>
  #include <netdb.h>
  #include <netinet/in.h>
