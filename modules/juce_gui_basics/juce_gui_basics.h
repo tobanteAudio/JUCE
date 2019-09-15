@@ -297,7 +297,7 @@ namespace juce
 #include "lookandfeel/juce_LookAndFeel_V4.h"
 #include "mouse/juce_LassoComponent.h"
 
-#if JUCE_LINUX
+#if JUCE_LINUX || JUCE_BSD
  #include "native/juce_linux_X11.h"
 #endif
 

@@ -27,7 +27,7 @@
 namespace juce
 {
 
-#if JUCE_WINDOWS || JUCE_LINUX || JUCE_MAC || DOXYGEN
+#if JUCE_WINDOWS || JUCE_LINUX || JUCE_MAC || JUCE_BSD || DOXYGEN
 
 
 //==============================================================================
@@ -92,7 +92,7 @@ public:
     */
     void* getNativeHandle() const;
 
-   #if JUCE_LINUX
+   #if JUCE_LINUX || JUCE_BSD
     /** @internal */
     void paint (Graphics&) override;
    #endif

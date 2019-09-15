@@ -342,7 +342,7 @@ uint64 File::getFileIdentifier() const
 
 static bool hasEffectiveRootFilePermissions()
 {
-   #if JUCE_LINUX
+   #if JUCE_LINUX || JUCE_BSD
     return geteuid() == 0;
    #else
     return false;
@@ -1312,7 +1312,7 @@ struct HighResolutionTimer::Pimpl
         pthread_condattr_t attr;
         pthread_condattr_init (&attr);
 
-       #if JUCE_LINUX || (JUCE_ANDROID && defined(__ANDROID_API__) && __ANDROID_API__ >= 21)
+       #if JUCE_LINUX || (JUCE_ANDROID && defined(__ANDROID_API__) && __ANDROID_API__ >= 21) || JUCE_BSD
         pthread_condattr_setclock(&attr, CLOCK_MONOTONIC);
        #endif
 

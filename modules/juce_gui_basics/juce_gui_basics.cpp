@@ -93,7 +93,7 @@
  #endif
 
 //==============================================================================
-#elif JUCE_LINUX
+#elif JUCE_LINUX || JUCE_BSD
  #include <X11/Xlib.h>
  #include <X11/Xatom.h>
  #include <X11/Xresource.h>
@@ -114,11 +114,11 @@
   #include <X11/extensions/Xinerama.h>
  #endif
 
- #if JUCE_USE_XSHM
+ //#if JUCE_USE_XSHM
   #include <X11/extensions/XShm.h>
   #include <sys/shm.h>
   #include <sys/ipc.h>
- #endif
+// #endif
 
  #if JUCE_USE_XRENDER
   // If you're missing these headers, try installing the libxrender-dev and libxcomposite-dev
@@ -306,7 +306,7 @@ namespace juce
  #include "native/juce_win32_DragAndDrop.cpp"
  #include "native/juce_win32_FileChooser.cpp"
 
-#elif JUCE_LINUX
+#elif JUCE_LINUX || JUCE_BSD
  #include "native/juce_linux_X11.cpp"
  #include "native/juce_linux_X11_Clipboard.cpp"
 
